@@ -1,0 +1,81 @@
+* {
+    text-align: center;
+}
+
+#container {
+    width: 800px;
+    height: 800px;
+    display: inline-block;
+    border-style: solid;
+}
+
+#grid {
+    display: grid;
+    /*grid-template-columns: repeat(16, 50px);
+    grid-template-rows: repeat(16, 50px);*/
+}
+
+
+.hovering {
+    background-color: black;
+}
+
+#reset, #erase {
+    margin: 30px;
+    padding: 10px;
+}
+
+
+
+
+
+/* one way to do the grid with flex
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid {
+    background-color: rgb(196, 17, 17);
+    width: 6%;
+    padding-bottom: 6%;
+    margin: 0.1%;
+   
+}
+
+*/
+
+/* this solution is easily adaptable with any square number (--n), gap (if you change it you should also change it in the width calc), and aspect ratio 
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    --n: 16;
+}
+
+
+.grid {
+    background-color: rgb(196, 17, 17);
+    width:calc((100% - (var(--n) - 1)*10px)/var(--n));
+    aspect-ratio:1/1;
+}
+
+.hovering {
+    background-color: cornsilk;
+}
+
+#reset {
+    margin-bottom: 30px;
+    padding: 30px;
+    border-width: 30px;
+    color: darkkhaki;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+#btn {
+    display: flex;
+    justify-content: center;
+}
