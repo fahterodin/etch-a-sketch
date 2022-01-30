@@ -1,81 +1,88 @@
-* {
-    text-align: center;
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
 }
 
-#container {
-    width: 800px;
-    height: 800px;
-    display: inline-block;
-    border-style: solid;
+body {
+    background-color: rgb(216, 214, 214);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#main {
+    display: flex;
+    justify-content: center;
+}
+
+#control {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 45px;
 }
 
 #grid {
     display: grid;
-    /*grid-template-columns: repeat(16, 50px);
-    grid-template-rows: repeat(16, 50px);*/
+    height: 40vw;
+    width: 40vw;
+    border: 1px rgba(0, 0, 0, 0.404) solid;
+    box-shadow: rgba(0, 0, 0, 0.24) 15px 15px 15px;
+    background-color: whitesmoke;
 }
 
-
-.hovering {
-    background-color: black;
+h1 {
+    text-align: center;
+    font-size:4vw;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
 }
-
-#reset, #erase {
-    margin: 30px;
-    padding: 10px;
-}
-
-
-
-
-
-/* one way to do the grid with flex
-
-#container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.grid {
-    background-color: rgb(196, 17, 17);
-    width: 6%;
-    padding-bottom: 6%;
-    margin: 0.1%;
-   
-}
-
-*/
-
-/* this solution is easily adaptable with any square number (--n), gap (if you change it you should also change it in the width calc), and aspect ratio 
-
-#container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    --n: 16;
-}
-
-
-.grid {
-    background-color: rgb(196, 17, 17);
-    width:calc((100% - (var(--n) - 1)*10px)/var(--n));
-    aspect-ratio:1/1;
-}
-
-.hovering {
-    background-color: cornsilk;
-}
-
-#reset {
+button {
     margin-bottom: 30px;
-    padding: 30px;
-    border-width: 30px;
-    color: darkkhaki;
-    font-weight: bolder;
-    font-size: 30px;
+    padding: 1vh 3vw;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 15vw;
+    height: 4vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 15px;
 }
 
-#btn {
-    display: flex;
-    justify-content: center;
+#sizeValue {
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+
+#slider {
+    background: #f3efef;
+    border: solid 1px #d0c282;
+    border-radius: 8px;
+    height: 7px;
+    width: 356px;
+    outline: none;
+    transition: background 450ms ease-in;
+    -webkit-appearance: none;
+}
+
+#slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 15px; /* Set a specific slider handle width */
+    height: 15px; /* Slider handle height */
+    border-radius: 15px;
+    background: #111111; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+  }
+
+#footer {
+    margin: 30px 0 0 0;
+    text-align: center;
+    background-color: rgb(12, 12, 12);
+    color: white;
+    left: 0;
+    bottom: 0;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
 }

@@ -1,74 +1,81 @@
-let gridInput = 16;
-const container = document.querySelector('#container');
-const grid = document.createElement('div');
-const btn = document.querySelector('#reset');
-const erase = document.querySelector('#erase');
+let currentSize = 16;
+let currentMode = 'black';
 
-grid.setAttribute('id', 'grid');
+const grid = document.querySelector('#grid');
+const size = document.querySelector('size');
+const reset = document.querySelector('#reset');
+const slider = document.querySelector('#slider');
+const rainbowBtn = document.querySelector('#rainbow');
+const blackBtn = document.querySelector('#black');
+const fadeBtn = document.querySelector('#fade');
 
-container.appendChild(grid);
+reset.onclick = () => reloadGrid();
+slider.onchange = (e) => changeSize(e.target.value);
+slider.onmousemove = (e) => updateSizeValue(e.target.value);
+rainbowBtn.onclick = () => setCurrentMode('rainbow');
+blackBtn.onclick = () => setCurrentMode('black');
+fadeBtn.onclick = () => setCurrentMode('fade');
 
-btn.addEventListener('click', e => makeGrid(e));
+grid.onclick = () => togglePen;
 
-erase.addEventListener('click', eraseAll);
+function setupGrid(size) {
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`
+    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`
 
-function eraseAll() {
-    let gridElement = container.querySelectorAll('div');
-    gridElement.forEach(gridElement => gridElement.style.backgroundColor = '#ffffff');    
-}
-
-function makeGrid(input) {
-
-    input = prompt('Give me a number');
-
-    if (input < 101) {
-
-        for (i = 0; i < (input * input); i++) {
-        let gridElement = document.createElement('div');
+    for (let i = 0; i < size * size; i++) {
+        const gridElement = document.createElement('div');
+        gridElement.addEventListener('mouseover', changeColor);
         grid.appendChild(gridElement);
-        gridElement.classList.add('gridElement');
-        gridElement.addEventListener('mouseover', e => e.target.classList.add('hovering'));
-        }
-
-        grid.style.cssText = `grid-template-columns: repeat(${input}, ${800/input}px); grid-template-rows: repeat(${input}, ${800/input}px);`;
-    }   else return alert("Must be <= 100!");
-    
+    }
 }
 
-makeGrid(16);
+function changeSize(value) {
+    setCurrentSize(value);
+    reloadGrid();
+}
 
+function setCurrentSize(newSize) {
+    currentSize = newSize;
+}
 
+function updateSizeValue(value) {
+    sizeValue.textContent = `${value} x ${value}`;
+}
 
+function reloadGrid() {
+    clearGrid();
+    setupGrid(currentSize);
+}
 
+let r = 255;
+let g = 255;
+let b = 255;
 
+function changeColor(e) {
+    if (currentMode === 'rainbow') {
+        const randomR = Math.floor(Math.random() * 256)
+        const randomG = Math.floor(Math.random() * 256)
+        const randomB = Math.floor(Math.random() * 256)
+        e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`
+    } else if (currentMode === 'black') {
+        e.target.style.backgroundColor = 'black';
+    } else if (currentMode === 'fade') {
+            if (r > 0) {
+            r -= 25.5;
+            g -= 25.5;
+            b -= 25.5;
+            e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        } else { r = 255; b = 255; g = 255};
+    }
+}
 
+function clearGrid() {
+    grid.textContent = '';
+}
 
+function setCurrentMode(newMode) {
+    currentMode = newMode;
+}
 
-
-
-//const container = document.querySelector("#container");
-//const btn = document.querySelector('#reset');
-//
-//btn.addEventListener('click', promptUser);
-//
-//let squareNumber = 16;
-//
-//for (i = 0; i < (squareNumber * squareNumber); i++) {
-//    let grid = document.createElement("div");
-//    grid.id = 'grid' + i;
-//    grid.className = 'grid';
-//    container.appendChild(grid);
-//    grid.addEventListener('mouseover', 
-//    e => e.target.classList.add('hovering'));
-//    //grid.addEventListener('mouseout', e => e.target.classList.remove('hovering'));
-//}
-//
-//function promptUser() {
-//    let user = prompt("Give me a number");
-//    if (user < 101) {
-//        squareNumber = user;
-//    }
-//}
-
-
+setupGrid(currentSize);
 
